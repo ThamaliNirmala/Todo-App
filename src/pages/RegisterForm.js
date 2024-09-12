@@ -1,22 +1,42 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { Button, Input } from "antd";
-import { useDispatch } from "react-redux";
+import { Button, Input, notification } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { formValiadationHelper } from "../helpers/formValidationHelper";
+import { constants } from "../constants/constants";
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const registeredUsers = useSelector(
+    (state) => state.auth.registeredUsers || []
+  );
+
   return (
     <Formik
       initialValues={{ name: "", email: "", password: "", confirmPassword: "" }}
       validationSchema={formValiadationHelper.registrationSchema}
-      onSubmit={(values) => {
-        const { name, email, password } = values;
-        dispatch(register({ name, email, password }));
-        navigate("/");
+      onSubmit={(values, { setSubmitting }) => {
+        try {
+          const { name, email, password } = values;
+          if (registeredUsers.some((user) => user.email === email)) {
+            notification.error({
+              message: constants.ALREADY_HAVE_AN_ACCOUNT,
+            });
+            setSubmitting(false);
+          } else {
+            dispatch(register({ name, email, password }));
+            navigate("/");
+          }
+        } catch (error) {
+          setSubmitting(false);
+          notification.error({
+            message: error,
+            placement: "topRight",
+          });
+        }
       }}
     >
       {({ isSubmitting }) => (
