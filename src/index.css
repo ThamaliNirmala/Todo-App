@@ -5,3 +5,22 @@
 .inter {
   font-family: Inter, sans-serif !important;
 }
+
+body{
+  margin: 0%;
+}
+
+.custom-button {
+  background-color: #002140;
+  border-color: #002140;
+}
+
+.custom-button:hover {
+  background-color: #003a70 !important;
+  border-color: #003a70 !important;
+}
+
+.custom-button:active {
+  background-color: #002140 !important;
+  border-color: #002140 !important;
+}

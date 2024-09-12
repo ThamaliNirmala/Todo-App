@@ -2,31 +2,33 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/slices/authSlice";
+import Logo from "../assets/logo.jpg";
+import { Button } from "antd";
+import { LogoutOutlined } from "@ant-design/icons";
 
 const NavBar = () => {
   const navigatye = useNavigate();
   const dispatch = useDispatch();
   return (
     <nav class="bg-white border-gray-200  fixed top-0 left-0 right-0 z-10">
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2">
+      <div class=" flex flex-wrap items-center justify-between mx-auto px-3 md:px-32 py-2">
         <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src={""} class="h-10" alt="CodeQ Logo" />
-          <span class="self-center md:text-xl text-sm font-semibold whitespace-nowrap text-[#002140] inter">
+          <img src={Logo} class="h-10" alt="CodeQ Logo" />
+          <span class="self-center md:text-xl text-sm font-semibold  text-[#002140] inter no-underline">
             Todo App
           </span>
         </a>
-        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <button
-            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-[#244496] rounded-lg group bg-[#244496] hover:text-white  "
+        <div class="">
+          <Button
+            className="hover:text-white  hover:bg-[#4096ff] "
+            type="primary" ghost
             onClick={() => {
               dispatch(logout());
               navigatye("/");
             }}
           >
-            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
-              Logout
-            </span>
-          </button>
+          < LogoutOutlined/>  Logout
+          </Button>
           <button
             data-collapse-toggle="navbar-cta"
             type="button"

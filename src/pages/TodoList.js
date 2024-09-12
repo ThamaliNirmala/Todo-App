@@ -53,6 +53,8 @@ const TodoList = () => {
           <Button
             style={{ marginRight: 8 }}
             onClick={() => dispatch(deleteTodo(todo.id))}
+            type="primary"
+            danger
           >
             <DeleteOutlined /> Delete
           </Button>
@@ -63,6 +65,9 @@ const TodoList = () => {
               setTodo(todo);
               setIsModalOpen(true);
             }}
+            type="primary"
+            ghost
+            className="text-[#04AA6D]  border-[#04AA6D] hover:bg-[#04AA6D] hover:text-white"
           >
             <EditOutlined /> Update
           </Button>
@@ -74,30 +79,37 @@ const TodoList = () => {
   return (
     <>
       <NavBar />
-      <div className="container">
-        <Button
-          className=" float-end mb-4"
-          onClick={() => {
-            setType("ADD");
-            setIsModalOpen(true);
-          }}
-        >
-          <PlusOutlined /> Add Todo
-        </Button>
-        <Table
-          dataSource={todos.map((todo) => ({ ...todo, key: todo.id }))}
-          columns={columns}
-          pagination={true}
-        />
-        <Modal
-          title={`${type === "ADD" ? "Add" : "Update"} Todo Item`}
-          open={isModalOpen}
-          onCancel={() => setIsModalOpen(false)}
-          footer={null}
-          destroyOnClose={true}
-        >
-          <TodoForm type={type} setIsModalOpen={setIsModalOpen} todo={todo} />
-        </Modal>
+      <div className="pt-28 bg-[#F0F0F9] h-screen ">
+        <div className=" mx-auto px-3 md:px-32">
+          <Button
+            className=" float-end mb-4 hover:bg-[#4096ff] hover:text-white"
+            type="primary"
+            ghost
+            onClick={() => {
+              setType("ADD");
+              setIsModalOpen(true);
+            }}
+          >
+            <PlusOutlined /> Add Todo
+          </Button>
+          <Table
+            dataSource={todos.map((todo) => ({ ...todo, key: todo.id }))}
+            columns={columns}
+            pagination={true}
+            scroll={{
+              x: 800,
+            }}
+          />
+          <Modal
+            title={`${type === "ADD" ? "Add" : "Update"} Todo Item`}
+            open={isModalOpen}
+            onCancel={() => setIsModalOpen(false)}
+            footer={null}
+            destroyOnClose={true}
+          >
+            <TodoForm type={type} setIsModalOpen={setIsModalOpen} todo={todo} />
+          </Modal>
+        </div>
       </div>
     </>
   );
