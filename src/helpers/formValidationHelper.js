@@ -14,4 +14,13 @@ const registrationSchema = Yup.object().shape({
     .required("Confirm password is required"),
 });
 
-export const formValiadationHelper = { loginSchema, registrationSchema };
+const todoSchema = Yup.object().shape({
+  title: Yup.string().required("Title is required"),
+  description: Yup.string().required("Description is required"),
+});
+
+export const formValiadationHelper = {
+  loginSchema,
+  registrationSchema,
+  todoSchema,
+};

@@ -1,8 +1,8 @@
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import LoginForm from "./pages/LoginForm";
 import RegisterForm from "./pages/RegisterForm";
-// import TodoList from "./TodoList";
-// import TodoForm from "./TodoForm";
+import TodoList from "./pages/TodoList";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
   return (
@@ -10,7 +10,14 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
-        {/* <Route path="/todos" element={<TodoList />} /> */}
+        <Route
+          path="/todos"
+          element={
+            <PrivateRoute>
+              <TodoList />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
