@@ -36,3 +36,6 @@ login/register and todo list pages.
 - Redux persist is used due to todos across page reloads.
 - Sorting, Searching and Filtering are added to the TodoList table.
 - Export as a CSV
+
+#### Live Demo URL
+- https://todo-guru.netlify.app/
