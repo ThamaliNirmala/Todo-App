@@ -1,11 +1,9 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { Button, Input, notification } from "antd";
 import { useDispatch } from "react-redux";
 import { addTodo, updateTodo } from "../redux/slices/todoSlice";
 import { formValiadationHelper } from "../helpers/formValidationHelper";
 import { constants } from "../constants/constants";
-import { useEffect, useState } from "react";
 
 const TodoForm = ({ type = "ADD", setIsModalOpen, todo }) => {
   const dispatch = useDispatch();

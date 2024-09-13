@@ -1,5 +1,4 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { Button, Input, notification } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/slices/authSlice";
@@ -15,8 +14,6 @@ const LoginForm = () => {
     (state) => state.auth.registeredUsers || []
   );
   const navigate = useNavigate();
-
-  console.log("registeredUsers", registeredUsers);
 
   return (
     <div className="md:grid md:grid-cols-2 md:h-screen">

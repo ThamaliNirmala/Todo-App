@@ -1,0 +1,6 @@
+
+[[redirects]]
+  from = "/*"          # Match all routes
+  to = "/index.html"   # Redirect all to index.html (for single-page apps)
+  status = 200
+
