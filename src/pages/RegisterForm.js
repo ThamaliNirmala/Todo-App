@@ -52,6 +52,9 @@ const RegisterForm = () => {
                 });
                 setSubmitting(false);
               } else {
+                notification.success({
+                  message: constants.REGISTRATION_SUCCESS_MSG,
+                });
                 dispatch(register({ name, email, password }));
                 navigate("/");
               }
