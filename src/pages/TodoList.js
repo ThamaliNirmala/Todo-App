@@ -1,10 +1,18 @@
 import { Table, Button, Checkbox, Modal, Switch } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleComplete, deleteTodo } from "../redux/slices/todoSlice";
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  DownloadOutlined,
+  EditOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import TodoForm from "../components/TodoForm";
 import NavBar from "../components/NavBar";
 import { useState } from "react";
+import { csvHelper } from "../helpers/csvHelper";
+import { GetColumnSearchProps } from "../helpers/searchHelper";
+import moment from "moment";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos);
@@ -19,12 +27,17 @@ const TodoList = () => {
       title: "Title",
       dataIndex: "title",
       key: "title",
+      sorter: (a, b) => a.title.localeCompare(b.title),
+      ...GetColumnSearchProps("title"),
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
+      sorter: (a, b) => a.description.localeCompare(b.description),
+      ...GetColumnSearchProps("description"),
     },
+
     {
       title: "Completed",
       dataIndex: "completed",
@@ -37,6 +50,11 @@ const TodoList = () => {
           {completed ? "Completed" : "Incomplete"}
         </Checkbox>
       ),
+      filters: [
+        { text: "Completed", value: true },
+        { text: "Incomplete", value: false },
+      ],
+      onFilter: (value, record) => record.completed === value,
     },
     {
       title: "Actions",
@@ -55,6 +73,7 @@ const TodoList = () => {
             onClick={() => dispatch(deleteTodo(todo.id))}
             type="primary"
             danger
+            ghost
           >
             <DeleteOutlined /> Delete
           </Button>
@@ -93,8 +112,21 @@ const TodoList = () => {
           >
             <PlusOutlined /> Add Todo
           </Button>
+          <Button onClick={() => csvHelper.handleDownloadCSV(todos)}>
+            <DownloadOutlined /> Export as a CSV
+          </Button>
           <Table
-            dataSource={todos.map((todo) => ({ ...todo, key: todo.id }))}
+            dataSource={[...todos]
+              ?.sort((cur, next) => {
+                const curDate = moment(parseInt(cur.id));
+                const nextDate = moment(parseInt(next.id));
+                return nextDate - curDate;
+              })
+              .map((todo) => ({
+                ...todo,
+                key: todo.id,
+                completedStatus: todo.completed ? "Completed" : "Incomplete",
+              }))}
             columns={columns}
             pagination={true}
             scroll={{
