@@ -87,6 +87,7 @@ const TodoList = () => {
             ghost
             onClick={() => {
               setType("ADD");
+              setTodo({});
               setIsModalOpen(true);
             }}
           >
