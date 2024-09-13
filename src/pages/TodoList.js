@@ -74,6 +74,7 @@ const TodoList = () => {
             type="primary"
             danger
             ghost
+            className="hover:bg-[#ff4d4f] hover:text-white"
           >
             <DeleteOutlined /> Delete
           </Button>
