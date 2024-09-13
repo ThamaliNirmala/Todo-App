@@ -1,5 +1,5 @@
 
-# Project Setup Guidlines 🧾
+# Project Setup Guidelines🧾
 
 ## Clone Repository 〽️
 
