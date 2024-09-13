@@ -2,9 +2,9 @@ import { Table, Button, Checkbox, Modal, Switch } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleComplete, deleteTodo } from "../redux/slices/todoSlice";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
-import { useRef, useState } from "react";
 import TodoForm from "../components/TodoForm";
 import NavBar from "../components/NavBar";
+import { useState } from "react";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos);
@@ -12,7 +12,7 @@ const TodoList = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [type, setType] = useState("ADD");
-  const [todo, setTodo] = useState({});
+  const [todo, setTodo] = useState({ title: "", description: "" });
 
   const columns = [
     {
@@ -87,7 +87,7 @@ const TodoList = () => {
             ghost
             onClick={() => {
               setType("ADD");
-              setTodo({});
+              setTodo({ title: "", description: "" });
               setIsModalOpen(true);
             }}
           >
