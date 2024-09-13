@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { formValiadationHelper } from "../helpers/formValidationHelper";
 import { constants } from "../constants/constants";
 import Background from "../assets/bgImg.jpeg";
+import Logo from "../assets/logo.png";
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const RegisterForm = () => {
   );
 
   return (
-    <div className="md:grid md:grid-cols-2 h-screen">
+    <div className="md:grid md:grid-cols-2 md:h-screen">
       <div
         className="bg-cover bg-center md:block hidden"
         style={{
@@ -27,10 +28,13 @@ const RegisterForm = () => {
         }}
       ></div>
 
-      <div className="xl:mx-36 md:mx-20 mx-10 my-32">
-        <h1 className="inter text-center text-4xl font-semibold mb-8 uppercase">
+      <div className="xl:mx-36 md:mx-20 mx-10 md:my-28 my-20">
+        {/* <h1 className="inter text-center text-4xl font-semibold mb-8 uppercase">
           Register
-        </h1>
+        </h1> */}
+        <div className="relative flex justify-center ">
+          <img src={Logo} class="w-44" alt="CodeQ Logo" />
+        </div>
         <Formik
           initialValues={{
             name: "",

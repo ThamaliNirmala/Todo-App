@@ -60,16 +60,16 @@ const TodoList = () => {
       title: "Actions",
       key: "actions",
       render: (_, todo) => (
-        <div>
-          <Switch
-            checked={todo.completed}
-            onChange={() => dispatch(toggleComplete(todo.id))}
-            checkedChildren="Complete"
-            unCheckedChildren="Incomplete"
-            style={{ marginRight: 8 }}
-          />
+        <div className="flex gap-5">
+          <div className="flex items-center">
+            <Switch
+              checked={todo.completed}
+              onChange={() => dispatch(toggleComplete(todo.id))}
+              checkedChildren="Complete"
+              unCheckedChildren="Incomplete"
+            />
+          </div>
           <Button
-            style={{ marginRight: 8 }}
             onClick={() => dispatch(deleteTodo(todo.id))}
             type="primary"
             danger
@@ -78,7 +78,6 @@ const TodoList = () => {
             <DeleteOutlined /> Delete
           </Button>
           <Button
-            style={{ marginRight: 8 }}
             onClick={() => {
               setType("EDIT");
               setTodo(todo);
@@ -98,23 +97,25 @@ const TodoList = () => {
   return (
     <>
       <NavBar />
-      <div className="pt-28 bg-[#F0F0F9] h-screen ">
+      <div className="pt-28 bg-[#F0F0F9] min-h-screen  ">
         <div className=" mx-auto px-3 md:px-32">
-          <Button
-            className=" float-end mb-4 hover:bg-[#4096ff] hover:text-white"
-            type="primary"
-            ghost
-            onClick={() => {
-              setType("ADD");
-              setTodo({ title: "", description: "" });
-              setIsModalOpen(true);
-            }}
-          >
-            <PlusOutlined /> Add Todo
-          </Button>
-          <Button onClick={() => csvHelper.handleDownloadCSV(todos)}>
-            <DownloadOutlined /> Export as a CSV
-          </Button>
+          <div className="flex justify-end mb-4 gap-4">
+            <Button
+              className=" hover:bg-[#4096ff] hover:text-white"
+              type="primary"
+              ghost
+              onClick={() => {
+                setType("ADD");
+                setTodo({ title: "", description: "" });
+                setIsModalOpen(true);
+              }}
+            >
+              <PlusOutlined /> Add Todo
+            </Button>
+            <Button onClick={() => csvHelper.handleDownloadCSV(todos)}>
+              <DownloadOutlined /> Export as a CSV
+            </Button>
+          </div>
           <Table
             dataSource={[...todos]
               ?.sort((cur, next) => {

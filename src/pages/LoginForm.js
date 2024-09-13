@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { formValiadationHelper } from "../helpers/formValidationHelper";
 import { constants } from "../constants/constants";
 import Background from "../assets/bgImg.jpeg";
+import Logo from "../assets/logo.png";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const LoginForm = () => {
   console.log("registeredUsers", registeredUsers);
 
   return (
-    <div className="md:grid md:grid-cols-2 h-screen">
+    <div className="md:grid md:grid-cols-2 md:h-screen">
       <div
         className="bg-cover bg-center md:block hidden"
         style={{
@@ -28,8 +29,11 @@ const LoginForm = () => {
           backgroundPosition: "center",
         }}
       ></div>
-      <div className="xl:mx-36 md:mx-20 mx-10 my-32">
-        <h1 className="inter text-center text-4xl font-semibold mb-8 uppercase">Login</h1>
+      <div className="xl:mx-36 md:mx-20 mx-10 md:my-28 my-20">
+        <div className="relative flex justify-center ">
+          <img src={Logo} class="w-44" alt="CodeQ Logo" />
+        </div>
+        {/* <h1 className="inter text-center text-4xl font-semibold mb-8 uppercase">Login</h1> */}
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={formValiadationHelper.loginSchema}
@@ -64,7 +68,12 @@ const LoginForm = () => {
         >
           {({ isSubmitting }) => (
             <Form className="">
-              <Field name="email" as={Input} placeholder="Email" className="inter h-9" />
+              <Field
+                name="email"
+                as={Input}
+                placeholder="Email"
+                className="inter h-9"
+              />
               <ErrorMessage
                 name="email"
                 component="div"
@@ -83,9 +92,19 @@ const LoginForm = () => {
                 className="text-red-500"
               />
               <div className="mt-7 text-end ">
-                <Link to={"/register"} className="no-underline text-xs font-medium text-[#1565d8] inter">Create Account</Link>
+                <Link
+                  to={"/register"}
+                  className="no-underline text-xs font-medium text-[#1565d8] inter"
+                >
+                  Create Account
+                </Link>
               </div>
-              <Button type="primary" htmlType="submit" loading={isSubmitting} className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button h-9 mt-2">
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={isSubmitting}
+                className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button h-9 mt-2"
+              >
                 Login
               </Button>
             </Form>
